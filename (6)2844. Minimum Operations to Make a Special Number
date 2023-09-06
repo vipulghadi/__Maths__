@@ -1,0 +1,37 @@
+-------------------------------(n*4)-------------------------------------------
+class Solution {
+public:
+    int solve(string&num,char f,char s){
+      bool fget=false,sget=false;
+       int find=0,sind=0;
+       bool zero=false;
+       for(int i=num.size()-1;i>=0;i--){
+           if(num[i]=='0')zero=true;
+           if(num[i]==s){
+               sget=true;
+               sind=i;
+               for(int j=i-1;j>=0;j--){
+                   if(num[j]=='0')zero=true;
+                   if(num[j]==f){
+                       fget=true;
+                       find=j;
+                       break;
+                   }
+               }
+               if(fget&&sget)break;
+           }
+       }
+           if((fget && sget))return(sind-find-1+(num.size()-sind-1));
+           if(zero)return num.size()-1;
+           return num.size();
+       }
+    int minimumOperations(string num) {
+        int mini=num.size();
+        mini=min(mini,solve(num,'5','0'));
+        mini=min(mini,solve(num,'0','0'));
+        mini=min(mini,solve(num,'7','5'));
+        mini=min(mini,solve(num,'2','5'));
+        return mini;
+    }
+};
+-------------------------------------------------------------------------------------------
